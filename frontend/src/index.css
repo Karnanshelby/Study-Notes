@@ -8,7 +8,6 @@
     }
 
     body {
-        background-image: url('../study.jpg');
         background-size: cover; /* Ensures the image covers the area */
         background-position: top center; /* Centers the image */
         height: 100%;
