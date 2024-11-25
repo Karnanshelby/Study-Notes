@@ -8,11 +8,11 @@ const AddEditNotes = ({ onClose, noteData, type  }) => {
   const [tags, setTags] = useState([]);
   const [error, setError] = useState(null)
 
-
+// edit note
   const editNote = async () => {
 
   }
-
+//add note
   const addNewNote = async () => {
 
   }
@@ -74,10 +74,12 @@ const AddEditNotes = ({ onClose, noteData, type  }) => {
           {" "}
         </textarea>
       </div>
-      <div className=" ">
+      <div className="mt-3">
         <label className="input-label text-red-400 uppercase">TAGS</label>
         <TagInput tags={tags} setTags={setTags} />
       </div>
+
+        {error && <p className="text-red-500 text-xs pt-4 ">{error}</p>}
 
       <button
         className="btn-primary font-medium mt-5 p-3"

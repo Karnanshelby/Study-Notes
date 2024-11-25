@@ -1,30 +1,57 @@
 import React, { useState } from "react";
 import PasswordInput from "../../components/Input/PasswordInput";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { validateEmail } from "../../utils/helper";
+import { useDispatch } from "react-redux";
+import { signInFailure, signInStart, signInSuccess } from "../../redux/user/userSlice";
+import axios from "axios";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleLogin = async(e) =>{
-    e.preventDefault()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-    if(!validateEmail(email)){
-      setError("Please enter a valid email address")
-      return
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    if (!validateEmail(email)) {
+      setError("Please enter a valid email address");
+      return;
     }
 
-    if(!password){
-      setError("Please enter the password")
-      return
+    if (!password) {
+      setError("Please enter the password");
+      return;
     }
 
-    setError("")
+    setError("");
 
     //Login api
-  }
+    try {
+      dispatch(signInStart());
+
+      const res = await axios.post(
+        "http://localhost:3000/api/auth/signin",
+        { email, password },
+        { withCredentials: true }
+      );
+
+      if(res.data.success === false){
+        console.log(res.data);
+        dispatch(signInFailure(data.message))
+      } 
+
+      dispatch(signInSuccess(res.data))
+      navigate("/")
+      
+    } catch (error) {
+      console.log(error);
+      dispatch(signInFailure(error.message));
+    }
+  };
 
   return (
     <div className="flex items-center justify-center mt-28">
@@ -54,16 +81,16 @@ const Login = () => {
           <p className="text-sm text-center mt-4">
             Not registered yet?{" "}
             <Link
-             to={"/signup"} 
-             className='font-medium text-[#2B85FF] underline'
+              to={"/signup"}
+              className="font-medium text-[#2B85FF] underline"
             >
-             Create an account
+              Create an account
             </Link>
           </p>
         </form>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Login;

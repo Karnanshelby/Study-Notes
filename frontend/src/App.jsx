@@ -6,6 +6,9 @@ import Signup from './pages/signup/Signup'
 import Navbar from './components/Navbar'
 
 const App = () => {
+
+  
+
   return (
   <BrowserRouter>
     <Navbar />  
