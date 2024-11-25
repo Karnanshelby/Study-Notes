@@ -12,7 +12,16 @@ const Home = () => {
   });
   return (
     <>
-      <div className="container mx-auto">
+      <div className="flex items-center justify-center "
+      style={{
+      backgroundImage: "url('/src/images/SignupPage.webp')",
+      backgroundSize: "cover",
+      backgroundAttachment:"fixed",
+      backgroundPosition: "center",
+      height:"100vh",
+      margin: 0,
+      }}
+      >
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mt-8 max-md:m-5">
           <NoteCard
             title={"Wake up at 6 p.m"}
