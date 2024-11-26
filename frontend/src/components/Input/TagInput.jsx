@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { MdClose } from "react-icons/md";
+import { MdAdd, MdClose } from "react-icons/md";
 
 const TagInput = ({ tags, setTags }) => {
 
@@ -7,6 +7,13 @@ const TagInput = ({ tags, setTags }) => {
 
     const handleInputChange = (e) => {
         setInputValue(e.target.value)
+    }
+
+    const addNewTag = () => {
+      if(inputValue.trim() !== ""){
+        setTags([...tags, inputValue.trim()])
+        setInputValue("")
+      }
     }
 
     const handleKeyDown = (e) => {
@@ -27,7 +34,7 @@ const TagInput = ({ tags, setTags }) => {
               key={index}
               className="flex items-center gap-2 text-sm text-slate-900 bg-slate-100 px-3 py-1 rounded"
             >
-              #{tags}
+              #{tag}
 
               <button onClick={()=>{
                 handleRemoveTag(tag)
@@ -46,6 +53,15 @@ const TagInput = ({ tags, setTags }) => {
         onKeyDown={handleKeyDown}
         />
         
+
+        <button className="w-8 h-8 flex items-center justify-center rounded border 
+        border-blue-700 hover:bg-blue-700"
+        onClick={()=>{
+          addNewTag()
+        }}>
+
+            <MdAdd className="text-2xl text-blue-700 hover:text-white"/> 
+        </button>
       </div>
     </div>
   );

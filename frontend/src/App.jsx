@@ -7,6 +7,9 @@ import Navbar from './components/Navbar'
 import Welcome from './pages/Welcome/Welcome'
 
 const App = () => {
+
+  
+
   return (
   <BrowserRouter>
     <Navbar />  
